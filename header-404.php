@@ -24,7 +24,6 @@
 <?php wp_body_open(); ?>
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'webmag' ); ?></a>
-
 		<!-- Header -->
 		<header id="header">
 			<!-- Nav -->
@@ -32,7 +31,10 @@
 				<!-- Main Nav -->
 				<div id="nav-fixed">
 					<div class="container">
-						<!-- logo -->
+
+                    <h1 style="color: red; margin-top: 40px; margin-bottom: 0;">Not found: Error 404!</h1>
+                        
+                        <!-- logo -->
 						<div class="nav-logo">
 							<a href="index.html" class="logo"><img src="./img/logo.png" alt=""></a>
 						</div>
@@ -120,41 +122,10 @@
 					<!-- /aside nav close -->
 				</div>
 				<!-- Aside Nav -->
-			</div>
+            </div>
+            
 			<!-- /Nav -->
 		</header>
 		<!-- /Header -->
 
-	<!-- <header id="masthead" class="site-header">
-		<div class="site-branding">
-		<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$webmag_description = get_bloginfo( 'description', 'display' );
-			if ( $webmag_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $webmag_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-			<?php endif; ?>
-		</div>
-
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'webmag' ); ?></button>
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
-				)
-			);
-			?>
-		</nav>
-	</header>     -->
 	

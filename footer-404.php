@@ -1,20 +1,10 @@
-<?php
-/**
- * The template for displaying the footer
- *
- * Contains the closing of the #content div and all content after.
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
- * @package Webmag
- */
-
-?>
-
 <!-- Footer -->
 <footer id="footer">
 	<!-- container -->
 	<div class="container">
+
+        <h1 style="color: green;">Сраница не найдена!!!</h1>
+        
 		<!-- row -->
 		<div class="row">
 			<div class="col-md-5">
@@ -81,7 +71,7 @@
 	<!-- /container -->
 </footer>
 <!-- /Footer -->
-</div><!-- #page -->
+
 <?php wp_footer(); ?>
 
 </body>

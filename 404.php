@@ -7,7 +7,7 @@
  * @package Webmag
  */
 
-get_header();
+get_header('404');
 ?>
 
 	<main id="primary" class="site-main">
@@ -20,7 +20,7 @@ get_header();
 			<div class="page-content">
 				<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'webmag' ); ?></p>
 
-					<?php
+				<?php
 					get_search_form();
 
 					the_widget( 'WP_Widget_Recent_Posts' );
@@ -52,9 +52,10 @@ get_header();
 					?>
 
 			</div><!-- .page-content -->
+			
 		</section><!-- .error-404 -->
 
 	</main><!-- #main -->
 
 <?php
-get_footer();
+get_footer('404');
