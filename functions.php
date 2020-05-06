@@ -50,7 +50,10 @@ if ( ! function_exists( 'webmag_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus(
 			array(
-				'menu-1' => esc_html__( 'Primary', 'webmag' ),
+				'nav-aside-menu' => esc_html__( 'Nav Aside', 'webmag' ),
+				'footer-links' => esc_html__( 'Footer About', 'webmag' ),
+				'footer-policy' => esc_html__( 'Footer Policy', 'webmag' ),
+				'footer-catagories' => esc_html__( 'Footer Catagories', 'webmag' ),
 			)
 		);
 
@@ -178,6 +181,8 @@ function add_library_animate(){
 	wp_enqueue_script('animate', get_template_directory_uri() . '/css/animate/animate.css');
 }
 add_action( 'wp_footer', 'add_library_animate' );
+
+add_filter('show_admin_bar', '__return_false'); // отключить админ-панель
 
 /**
  * Implement the Custom Header feature.

@@ -66,7 +66,15 @@
 				<!-- Aside Nav -->
 				<div id="nav-aside">
 					<!-- nav -->
-					<div class="section-row">
+
+					<?php wp_nav_menu([
+						'theme_location'  => 'nav-aside-menu',
+						'container'       => 'div',
+						'container_class' => 'section-row',
+						'menu_class'      => 'nav-aside-menu',
+					]) ?>
+
+					<!-- <div class="section-row">
 						<ul class="nav-aside-menu">
 							<li><a href="index.html">Home</a></li>
 							<li><a href="about.html">About Us</a></li>
@@ -74,7 +82,7 @@
 							<li><a href="#">Advertisement</a></li>
 							<li><a href="contact.html">Contacts</a></li>
 						</ul>
-					</div>
+					</div> -->
 					<!-- /nav -->
 
 					<!-- widget posts -->
