@@ -34,29 +34,35 @@
 					<div class="container">
 						<!-- logo -->
 						<div class="nav-logo">
-							<a href="index.html" class="logo"><img src="./img/logo.png" alt=""></a>
+							<?php the_custom_logo(); ?>
 						</div>
 						<!-- /logo -->
 
 						<!-- nav -->
 						<ul class="nav-menu nav navbar-nav">
+							<?php wp_list_categories([
+								'hide_empty'         => 0,
+								'include'            => '19, 20, 21, 22, 23, 24',
+								'title_li'           => '',
+								//'order'			     => 'ASC',
+								'orderby'			 => 'ID',
+							]) ?>
+						</ul>
+
+						<!-- <ul class="nav-menu nav navbar-nav">
 							<li><a href="category.html">News</a></li>
 							<li><a href="category.html">Popular</a></li>
 							<li class="cat-1"><a href="category.html">Web Design</a></li>
 							<li class="cat-2"><a href="category.html">JavaScript</a></li>
 							<li class="cat-3"><a href="category.html">Css</a></li>
 							<li class="cat-4"><a href="category.html">Jquery</a></li>
-						</ul>
+						</ul> -->
 						<!-- /nav -->
 
 						<!-- search & aside toggle -->
 						<div class="nav-btns">
 							<button class="aside-btn"><i class="fa fa-bars"></i></button>
-							<button class="search-btn"><i class="fa fa-search"></i></button>
-							<div class="search-form">
-								<input class="search-input" type="text" name="search" placeholder="Enter Your Search ...">
-								<button class="search-close"><i class="fa fa-times"></i></button>
-							</div>
+							<?php get_search_form(); ?>
 						</div>
 						<!-- /search & aside toggle -->
 					</div>

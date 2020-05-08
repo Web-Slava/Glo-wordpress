@@ -605,9 +605,9 @@ a {
 	color: #4169e1;
 }
 
-a:visited {
+/* a:visited {
 	color: #800080;
-}
+} */
 
 a:hover,
 a:focus,
@@ -700,6 +700,10 @@ a:active {
 .site-main
 .post-navigation {
 	margin: 0 0 1.5em;
+}
+
+.site-main{
+	margin-top: 50px;
 }
 
 .comment-navigation .nav-links,
