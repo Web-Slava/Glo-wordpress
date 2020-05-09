@@ -27,7 +27,7 @@ get_header();
 
 				$query = new WP_Query( [
 					'posts_per_page' => 2,
-					'category__name'        => 'css, javascript, web design, popular, jquery',
+					'category__name' => 'css, javascript, web design, popular, jquery, news',
 				] );
 				
 				if ( $query->have_posts() ) {
@@ -59,7 +59,6 @@ get_header();
 				wp_reset_postdata(); // Сбрасываем $post
 				?>
 			</ul>
-			
 		</div>
 		<!-- /row -->
 
@@ -71,197 +70,133 @@ get_header();
 				</div>
 			</div>
 			<!-- post -->
-			<div class="col-md-4">
-				<div class="post">
-					<a class="post-img" href="blog-post.html"><img src="./img/post-3.jpg" alt=""></a>
-					<div class="post-body">
-						<div class="post-meta">
-							<a class="post-category cat-1" href="category.html">Web Design</a>
-							<span class="post-date">March 27, 2018</span>
+			<ul>
+				<?php		
+				global $post;
+
+				$query = new WP_Query( [
+					'posts_per_page' => 6,
+					'category__name' => 'css, javascript, web design, popular, jquery, news',
+				] );
+				
+				if ( $query->have_posts() ) {
+					while ( $query->have_posts() ) {
+						$query->the_post();
+						?>
+						<!-- Вывода постов, функции цикла: the_title() и т.д. -->
+						<!-- post -->
+						<div class="col-md-4">
+							<div class="post">
+								<a class="post-img" href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+								<div class="post-body">
+									<div class="post-meta">
+										<a class="post-category cat-1" href="category.html"><?php echo get_the_category()[0] -> cat_name; ?></a>
+										<span class="post-date"><?php the_time('j F, Y'); ?></span>
+									</div>
+									<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+								</div>
+							</div>
 						</div>
-						<h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
-					</div>
-				</div>
-			</div>
-			<!-- /post -->
-			<!-- post -->
-			<div class="col-md-4">
-				<div class="post">
-					<a class="post-img" href="blog-post.html"><img src="./img/post-4.jpg" alt=""></a>
-					<div class="post-body">
-						<div class="post-meta">
-							<a class="post-category cat-2" href="category.html">JavaScript</a>
-							<span class="post-date">March 27, 2018</span>
-						</div>
-						<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
-					</div>
-				</div>
-			</div>
-			<!-- /post -->
-			<!-- post -->
-			<div class="col-md-4">
-				<div class="post">
-					<a class="post-img" href="blog-post.html"><img src="./img/post-5.jpg" alt=""></a>
-					<div class="post-body">
-						<div class="post-meta">
-							<a class="post-category cat-3" href="category.html">Jquery</a>
-							<span class="post-date">March 27, 2018</span>
-						</div>
-						<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
-					</div>
-				</div>
-			</div>
-			<!-- /post -->
-			<div class="clearfix visible-md visible-lg"></div>
-			<!-- post -->
-			<div class="col-md-4">
-				<div class="post">
-					<a class="post-img" href="blog-post.html"><img src="./img/post-6.jpg" alt=""></a>
-					<div class="post-body">
-						<div class="post-meta">
-							<a class="post-category cat-2" href="category.html">JavaScript</a>
-							<span class="post-date">March 27, 2018</span>
-						</div>
-						<h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend Development Block!</a></h3>
-					</div>
-				</div>
-			</div>
-			<!-- /post -->
-			<!-- post -->
-			<div class="col-md-4">
-				<div class="post">
-					<a class="post-img" href="blog-post.html"><img src="./img/post-1.jpg" alt=""></a>
-					<div class="post-body">
-						<div class="post-meta">
-							<a class="post-category cat-4" href="category.html">Css</a>
-							<span class="post-date">March 27, 2018</span>
-						</div>
-						<h3 class="post-title"><a href="blog-post.html">CSS Float: A Tutorial</a></h3>
-					</div>
-				</div>
-			</div>
-			<!-- /post -->
-			<!-- post -->
-			<div class="col-md-4">
-				<div class="post">
-					<a class="post-img" href="blog-post.html"><img src="./img/post-2.jpg" alt=""></a>
-					<div class="post-body">
-						<div class="post-meta">
-							<a class="post-category cat-1" href="category.html">Web Design</a>
-							<span class="post-date">March 27, 2018</span>
-						</div>
-						<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
-					</div>
-				</div>
-			</div>
-			<!-- /post -->
+						<!-- /post -->						
+						<?php 
+					}
+				} else {
+					// Постов не найдено
+					echo "постов не найдено";
+				}			
+				wp_reset_postdata(); // Сбрасываем $post
+				?>				
+			</ul>
 		</div>
 		<!-- /row -->
+
 		<!-- row -->
 		<div class="row">
 			<div class="col-md-8">
 				<div class="row">
 					<!-- post -->
-					<div class="col-md-12">
-						<div class="post post-thumb">
-							<a class="post-img" href="blog-post.html"><img src="./img/post-2.jpg" alt=""></a>
-							<div class="post-body">
-								<div class="post-meta">
-									<a class="post-category cat-3" href="category.html">Jquery</a>
-									<span class="post-date">March 27, 2018</span>
+					<ul>
+						<?php		
+						global $post;
+
+						$query = new WP_Query( [
+							'posts_per_page' => 1,
+							'category__name' => 'css, javascript, web design, popular, jquery, news',
+						] );
+						
+						if ( $query->have_posts() ) {
+							while ( $query->have_posts() ) {
+								$query->the_post();
+								?>
+								<!-- Вывода постов, функции цикла: the_title() и т.д. -->
+								<!-- post -->
+								<div class="col-md-12">
+									<div class="post post-thumb">
+										<a class="post-img" href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+										<div class="post-body">
+											<div class="post-meta">
+												<a class="post-category cat-3" href="category.html"><?php echo get_the_category()[0] -> cat_name; ?></a>
+												<span class="post-date"><?php the_time('j F, Y'); ?></span>
+											</div>
+											<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+										</div>
+									</div>
 								</div>
-								<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
-							</div>
-						</div>
-					</div>
+								<!-- /post -->						
+								<?php 
+							}
+						} else {
+							// Постов не найдено
+							echo "постов не найдено";
+						}			
+						wp_reset_postdata(); // Сбрасываем $post
+						?>				
+					</ul>	
 					<!-- /post -->
+
 					<!-- post -->
-					<div class="col-md-6">
-						<div class="post">
-							<a class="post-img" href="blog-post.html"><img src="./img/post-1.jpg" alt=""></a>
-							<div class="post-body">
-								<div class="post-meta">
-									<a class="post-category cat-4" href="category.html">Css</a>
-									<span class="post-date">March 27, 2018</span>
+					<ul>
+						<?php $posts = get_posts( array(
+							'numberposts' => 6,
+							'orderby'     => 'date',
+							'order'       => 'DESC',
+							'include'     => array(),
+							'exclude'     => array(),
+							'meta_key'    => '',
+							'meta_value'  =>'',
+							'post_type'   => 'post',
+							'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+						) );
+						$count = 0;
+						foreach( $posts as $post ){
+							$count++;
+							setup_postdata($post); ?>
+						    <div class="col-md-6">
+								<div class="post">
+									<a class="post-img" href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+									<div class="post-body">
+										<div class="post-meta">
+											<a class="post-category cat-4" href="category.html"><?php echo get_the_category()[0] -> cat_name; ?></a>
+											<span class="post-date"><?php the_time(); ?></span>
+										</div>
+										<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+									</div>
 								</div>
-								<h3 class="post-title"><a href="blog-post.html">CSS Float: A Tutorial</a></h3>
 							</div>
-						</div>
-					</div>
-					<!-- /post -->
-					<!-- post -->
-					<div class="col-md-6">
-						<div class="post">
-							<a class="post-img" href="blog-post.html"><img src="./img/post-2.jpg" alt=""></a>
-							<div class="post-body">
-								<div class="post-meta">
-									<a class="post-category cat-1" href="category.html">Web Design</a>
-									<span class="post-date">March 27, 2018</span>
-								</div>
-								<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
-							</div>
-						</div>
-					</div>
-					<!-- /post -->
-					<div class="clearfix visible-md visible-lg"></div>
-					<!-- post -->
-					<div class="col-md-6">
-						<div class="post">
-							<a class="post-img" href="blog-post.html"><img src="./img/post-4.jpg" alt=""></a>
-							<div class="post-body">
-								<div class="post-meta">
-									<a class="post-category cat-2" href="category.html">JavaScript</a>
-									<span class="post-date">March 27, 2018</span>
-								</div>
-								<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
-							</div>
-						</div>
-					</div>
-					<!-- /post -->
-					<!-- post -->
-					<div class="col-md-6">
-						<div class="post">
-							<a class="post-img" href="blog-post.html"><img src="./img/post-5.jpg" alt=""></a>
-							<div class="post-body">
-								<div class="post-meta">
-									<a class="post-category cat-3" href="category.html">Jquery</a>
-									<span class="post-date">March 27, 2018</span>
-								</div>
-								<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
-							</div>
-						</div>
-					</div>
-					<!-- /post -->
-					<div class="clearfix visible-md visible-lg"></div>
-					<!-- post -->
-					<div class="col-md-6">
-						<div class="post">
-							<a class="post-img" href="blog-post.html"><img src="./img/post-3.jpg" alt=""></a>
-							<div class="post-body">
-								<div class="post-meta">
-									<a class="post-category cat-1" href="category.html">Web Design</a>
-									<span class="post-date">March 27, 2018</span>
-								</div>
-								<h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
-							</div>
-						</div>
-					</div>
-					<!-- /post -->
-					<!-- post -->
-					<div class="col-md-6">
-						<div class="post">
-							<a class="post-img" href="blog-post.html"><img src="./img/post-4.jpg" alt=""></a>
-							<div class="post-body">
-								<div class="post-meta">
-									<a class="post-category cat-2" href="category.html">JavaScript</a>
-									<span class="post-date">March 27, 2018</span>
-								</div>
-								<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
-							</div>
-						</div>
-					</div>
+							<?php					
+							if( $count%2 == 0 ) { ?> 
+								<div class="clearfix visible-md visible-lg"></div> 
+							<?php
+							} else if ( !$query->have_posts() ){
+								echo "постов не найдено!";
+							}
+						} 
+							wp_reset_postdata(); 
+							?>
+					</ul>
 					<!-- /post -->
 				</div>
+	
 			</div>
 			<div class="col-md-4">
 				<!-- post widget -->
@@ -350,46 +285,42 @@ get_header();
 					</div>
 				</div>
 				<!-- post -->
-				<div class="col-md-4">
-					<div class="post">
-						<a class="post-img" href="blog-post.html"><img src="./img/post-4.jpg" alt=""></a>
-						<div class="post-body">
-							<div class="post-meta">
-								<a class="post-category cat-2" href="category.html">JavaScript</a>
-								<span class="post-date">March 27, 2018</span>
+				<ul>
+					<?php		
+					global $post;
+					$query = new WP_Query( [
+						'posts_per_page' => 3,
+						'category__name' => 'css, javascript, web design, popular, jquery, news',
+					] );
+					
+					if ( $query->have_posts() ) {
+						while ( $query->have_posts() ) {
+							$query->the_post();
+							?>
+							<!-- Вывода постов, функции цикла: the_title() и т.д. -->
+							<!-- post -->
+							<div class="col-md-4">
+								<div class="post">
+									<a class="post-img" href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+									<div class="post-body">
+										<div class="post-meta">
+											<a class="post-category cat-3" href="category.html"><?php echo get_the_category()[0] -> cat_name; ?></a>
+											<span class="post-date"><?php the_time(); ?></span>
+										</div>
+										<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+									</div>
+								</div>
 							</div>
-							<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
-						</div>
-					</div>
-				</div>
-				<!-- /post -->
-				<!-- post -->
-				<div class="col-md-4">
-					<div class="post">
-						<a class="post-img" href="blog-post.html"><img src="./img/post-5.jpg" alt=""></a>
-						<div class="post-body">
-							<div class="post-meta">
-								<a class="post-category cat-3" href="category.html">Jquery</a>
-								<span class="post-date">March 27, 2018</span>
-							</div>
-							<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
-						</div>
-					</div>
-				</div>
-				<!-- /post -->
-				<!-- post -->
-				<div class="col-md-4">
-					<div class="post">
-						<a class="post-img" href="blog-post.html"><img src="./img/post-3.jpg" alt=""></a>
-						<div class="post-body">
-							<div class="post-meta">
-								<a class="post-category cat-1" href="category.html">Web Design</a>
-								<span class="post-date">March 27, 2018</span>
-							</div>
-							<h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
-						</div>
-					</div>
-				</div>
+							<!-- /post -->						
+							<?php 
+						}
+					} else {
+						// Постов не найдено
+						echo "постов не найдено";
+					}			
+					wp_reset_postdata(); // Сбрасываем $post
+					?>				
+				</ul>
 				<!-- /post -->
 			</div>
 			<!-- /row -->
@@ -411,74 +342,53 @@ get_header();
 							</div>
 						</div>
 						<!-- post -->
-						<div class="col-md-12">
-							<div class="post post-row">
-								<a class="post-img" href="blog-post.html"><img src="./img/post-4.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-meta">
-										<a class="post-category cat-2" href="category.html">JavaScript</a>
-										<span class="post-date">March 27, 2018</span>
+						<ul>
+							<?php		
+							global $post;
+
+							$query = new WP_Query( [
+								'posts_per_page' => 4,
+								'category__name' => 'css, javascript, web design, popular, jquery, news',
+							] );
+							
+							if ( $query->have_posts() ) {
+								while ( $query->have_posts() ) {
+									$query->the_post();
+									?>
+									<!-- Вывода постов, функции цикла: the_title() и т.д. -->
+									<!-- post -->
+									<div class="col-md-12">
+										<div class="post post-row">
+											<a class="post-img" href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+											<div class="post-body">
+												<div class="post-meta">
+													<a class="post-category cat-2" href="category.html"><?php echo get_the_category()[0] -> cat_name; ?></a>
+													<span class="post-date"><?php the_time(); ?></span>
+												</div>
+												<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+												<?php the_excerpt(); ?>
+											</div>
+										</div>
 									</div>
-									<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-								</div>
-							</div>
-						</div>
-						<!-- /post -->
-						<!-- post -->
-						<div class="col-md-12">
-							<div class="post post-row">
-								<a class="post-img" href="blog-post.html"><img src="./img/post-6.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-meta">
-										<a class="post-category cat-2" href="category.html">JavaScript</a>
-										<span class="post-date">March 27, 2018</span>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend Development Block!</a></h3>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-								</div>
-							</div>
-						</div>
-						<!-- /post -->
-						<!-- post -->
-						<div class="col-md-12">
-							<div class="post post-row">
-								<a class="post-img" href="blog-post.html"><img src="./img/post-1.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-meta">
-										<a class="post-category cat-4" href="category.html">Css</a>
-										<span class="post-date">March 27, 2018</span>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">CSS Float: A Tutorial</a></h3>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-								</div>
-							</div>
-						</div>
-						<!-- /post -->
-						
-						<!-- post -->
-						<div class="col-md-12">
-							<div class="post post-row">
-								<a class="post-img" href="blog-post.html"><img src="./img/post-2.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-meta">
-										<a class="post-category cat-3" href="category.html">Jquery</a>
-										<span class="post-date">March 27, 2018</span>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-								</div>
-							</div>
-						</div>
-						<!-- /post -->
-						
+									<!-- /post -->						
+									<?php 
+								}
+							} else {
+								// Постов не найдено
+								echo "постов не найдено";
+							}			
+							wp_reset_postdata(); // Сбрасываем $post
+							?>				
+						</ul>
+
 						<div class="col-md-12">
 							<div class="section-row">
 								<button class="primary-button center-block">Load More</button>
 							</div>
 						</div>
-					</div>
+					</div>					
 				</div>
+
 				<div class="col-md-4">
 					<!-- ad -->
 					<div class="aside-widget text-center">

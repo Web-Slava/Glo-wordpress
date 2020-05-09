@@ -639,6 +639,8 @@ RESPONSIVE
      float: left;
 }
  .post.post-row .post-body {
+     display: flex;
+     flex-direction: column;
      margin-left: calc(40% + 30px);
 }
  .post.post-row .post-meta {

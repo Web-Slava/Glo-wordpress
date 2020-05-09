@@ -184,6 +184,14 @@ add_action( 'wp_footer', 'add_library_animate' );
 
 add_filter('show_admin_bar', '__return_false'); // отключить админ-панель
 
+add_filter( 'excerpt_length', function(){
+	return 14;
+} ); // обрезаем текст поста до 20 слов (the_excerpt())
+
+add_filter('excerpt_more', function($more) {
+	return '...';
+}); // вместо [...] выводит ... у обрезанного текста
+
 /**
  * Implement the Custom Header feature.
  */
