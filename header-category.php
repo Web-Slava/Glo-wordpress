@@ -70,7 +70,7 @@
 				]) ?>
 
 				<!-- widget posts -->
-					<?php get_sidebar('menu'); ?>
+				<?php get_sidebar('menu'); ?>
 				<!-- /widget posts -->
 
 				<!-- social links -->
@@ -92,6 +92,26 @@
 			<!-- Aside Nav -->
 		</div>
 		<!-- /Nav -->
+		<!-- Page Header -->
+		<div class="page-header">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-10">
+						<ul class="page-header-breadcrumb">
+							<li><a href="<?php
+								$category = get_the_category()[0] -> cat_name;
+								$category_id = get_cat_ID($category);
+								$link = get_category_link($category_id);
+								echo $link;
+							 ?>">Home</a></li>
+							<li><?php echo get_the_category()[0] -> cat_name; ?></li>
+						</ul>
+						<h1><?php echo get_the_category()[0] -> cat_name; ?></h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Page Header -->
 	</header>
 	<!-- /Header -->
 	

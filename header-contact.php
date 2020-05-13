@@ -70,7 +70,7 @@
 				]) ?>
 
 				<!-- widget posts -->
-					<?php get_sidebar('menu'); ?>
+				<?php get_sidebar('menu'); ?>
 				<!-- /widget posts -->
 
 				<!-- social links -->
@@ -92,6 +92,20 @@
 			<!-- Aside Nav -->
 		</div>
 		<!-- /Nav -->
+		<!-- Page Header -->
+		<div class="page-header">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-10">
+						<ul class="page-header-breadcrumb">
+							<li><a href="index.php">Home</a></li>
+							<li>Contact</li>
+						</ul>
+						<h1>Contact</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Page Header -->
 	</header>
 	<!-- /Header -->
-	

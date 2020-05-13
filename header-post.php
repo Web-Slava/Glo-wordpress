@@ -70,7 +70,7 @@
 				]) ?>
 
 				<!-- widget posts -->
-					<?php get_sidebar('menu'); ?>
+				<?php get_sidebar('menu'); ?>
 				<!-- /widget posts -->
 
 				<!-- social links -->
@@ -92,6 +92,28 @@
 			<!-- Aside Nav -->
 		</div>
 		<!-- /Nav -->
+		<!-- Page Header -->
+		<div id="post-header" class="page-header">
+			<div class="background-img" style="background-image: url('<?php echo get_the_post_thumbnail_url( '', 'post-bg' ) ?>');"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-10">
+						<div class="post-meta">
+							<a class="post-category cat-2" href="<?php
+								$category = get_the_category()[0] -> cat_name;
+								$category_id = get_cat_ID($category);
+								$link = get_category_link($category_id);
+								echo $link;
+							 ?>">
+							 <?php echo get_the_category()[0] -> cat_name; ?></a>
+							<span class="post-date"><?php the_time(); ?></span>
+						</div>
+						<h1><?php the_title(); ?></h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Page Header -->
 	</header>
 	<!-- /Header -->
 	

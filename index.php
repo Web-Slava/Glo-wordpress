@@ -11,6 +11,10 @@
  *
  * @package Webmag
  */
+/*
+Template Name: Home
+Template Post Type: page
+*/
 
 get_header();
 ?>
@@ -38,10 +42,15 @@ get_header();
 						<!-- post -->
 						<div class="col-md-6">
 							<div class="post post-thumb">
-								<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('spec_thumb'); ?></a>
+								<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-m'); ?></a>
 								<div class="post-body">
 									<div class="post-meta">
-										<a class="post-category cat-2" href="category.html"><?php echo get_the_category()[0] -> cat_name; ?></a>
+										<a class="post-category cat-2" href="<?php
+											$category = get_the_category()[0] -> cat_name;
+											$category_id = get_cat_ID($category);
+											$link = get_category_link($category_id);
+											echo $link;
+							 			?>"><?php echo get_the_category()[0] -> cat_name; ?></a>
 										<span class="post-date"><?php the_time('j F, Y'); ?></span>
 									</div>
 									<h3 class="post-title"><a href="<?php the_permalink() ?>"> <?php the_title(); ?></a></h3>
@@ -87,10 +96,15 @@ get_header();
 						<!-- post -->
 						<div class="col-md-4">
 							<div class="post">
-								<a class="post-img" href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+								<a class="post-img" href="<?php the_permalink(); ?>"><?php the_post_thumbnail('post-thumb-sm'); ?></a>
 								<div class="post-body">
 									<div class="post-meta">
-										<a class="post-category cat-1" href="category.html"><?php echo get_the_category()[0] -> cat_name; ?></a>
+										<a class="post-category cat-1" href="<?php
+											$category = get_the_category()[0] -> cat_name;
+											$category_id = get_cat_ID($category);
+											$link = get_category_link($category_id);
+											echo $link;
+							 			?>"><?php echo get_the_category()[0] -> cat_name; ?></a>
 										<span class="post-date"><?php the_time('j F, Y'); ?></span>
 									</div>
 									<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
@@ -132,10 +146,15 @@ get_header();
 								<!-- post -->
 								<div class="col-md-12">
 									<div class="post post-thumb">
-										<a class="post-img" href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+										<a class="post-img" href="<?php the_permalink(); ?>"><?php the_post_thumbnail('post-thumb-lg'); ?></a>
 										<div class="post-body">
 											<div class="post-meta">
-												<a class="post-category cat-3" href="category.html"><?php echo get_the_category()[0] -> cat_name; ?></a>
+												<a class="post-category cat-3" href="<?php
+													$category = get_the_category()[0] -> cat_name;
+													$category_id = get_cat_ID($category);
+													$link = get_category_link($category_id);
+													echo $link;
+							 					?>"><?php echo get_the_category()[0] -> cat_name; ?></a>
 												<span class="post-date"><?php the_time('j F, Y'); ?></span>
 											</div>
 											<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
@@ -173,11 +192,16 @@ get_header();
 							setup_postdata($post); ?>
 						    <div class="col-md-6">
 								<div class="post">
-									<a class="post-img" href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+									<a class="post-img" href="<?php the_permalink(); ?>"><?php the_post_thumbnail('post-thumb-sm'); ?></a>
 									<div class="post-body">
 										<div class="post-meta">
-											<a class="post-category cat-4" href="category.html"><?php echo get_the_category()[0] -> cat_name; ?></a>
-											<span class="post-date"><?php the_time(); ?></span>
+											<a class="post-category cat-4" href="<?php
+												$category = get_the_category()[0] -> cat_name;
+												$category_id = get_cat_ID($category);
+												$link = get_category_link($category_id);
+												echo $link;
+							 				?>"><?php echo get_the_category()[0] -> cat_name; ?></a>
+											<span class="post-date"><?php the_time('j F, Y'); ?></span>
 										</div>
 										<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 									</div>
@@ -231,7 +255,7 @@ get_header();
 				</div>
 				<!-- /post widget -->
 				<!-- post widget -->
-				<div class="aside-widget">
+				<!-- <div class="aside-widget">
 					<div class="section-title">
 						<h2>Featured Posts</h2>
 					</div>
@@ -255,7 +279,7 @@ get_header();
 							<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<!-- /post widget -->
 				
 				<!-- ad -->
@@ -301,11 +325,16 @@ get_header();
 							<!-- post -->
 							<div class="col-md-4">
 								<div class="post">
-									<a class="post-img" href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+									<a class="post-img" href="<?php the_permalink(); ?>"><?php the_post_thumbnail('post-thumb-sm'); ?></a>
 									<div class="post-body">
 										<div class="post-meta">
-											<a class="post-category cat-3" href="category.html"><?php echo get_the_category()[0] -> cat_name; ?></a>
-											<span class="post-date"><?php the_time(); ?></span>
+											<a class="post-category cat-3" href="<?php
+												$category = get_the_category()[0] -> cat_name;
+												$category_id = get_cat_ID($category);
+												$link = get_category_link($category_id);
+												echo $link;
+							 				?>"><?php echo get_the_category()[0] -> cat_name; ?></a>
+											<span class="post-date"><?php the_time('j F, Y'); ?></span>
 										</div>
 										<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 									</div>
@@ -359,11 +388,16 @@ get_header();
 									<!-- post -->
 									<div class="col-md-12">
 										<div class="post post-row">
-											<a class="post-img" href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+											<a class="post-img" href="<?php the_permalink(); ?>"><?php the_post_thumbnail('post-thumb-xs'); ?></a>
 											<div class="post-body">
 												<div class="post-meta">
-													<a class="post-category cat-2" href="category.html"><?php echo get_the_category()[0] -> cat_name; ?></a>
-													<span class="post-date"><?php the_time(); ?></span>
+													<a class="post-category cat-2" href="<?php
+														$category = get_the_category()[0] -> cat_name;
+														$category_id = get_cat_ID($category);
+														$link = get_category_link($category_id);
+														echo $link;
+							 						?>"><?php echo get_the_category()[0] -> cat_name; ?></a>
+													<span class="post-date"><?php the_time('j F, Y'); ?></span>
 												</div>
 												<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 												<?php the_excerpt(); ?>
@@ -440,5 +474,4 @@ get_header();
 <!-- /section -->
 
 <?php
-get_sidebar();
 get_footer();

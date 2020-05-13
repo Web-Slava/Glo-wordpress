@@ -46,7 +46,13 @@ if ( ! function_exists( 'webmag_setup' ) ) :
 		 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 		 */
 		add_theme_support( 'post-thumbnails' ); //дает возможность прикреплять изображения к записям
-		add_image_size( 'spec_thumb', 600, 450, true ); // задаем размер изображения
+		add_image_size( 'post-thumb-lg', 750, 450, true );
+		add_image_size( 'post-thumb-m', 555, 333, true ); // задаем размер изображения
+		add_image_size( 'post-thumb-sm', 360, 216, true ); // задаем размер изображения
+		add_image_size( 'post-thumb-xs', 300, 180, true ); // задаем размер изображения
+		add_image_size( 'widget-thumb', 90, 90, true ); // задаем размер изображения
+		add_image_size( 'post-bg', 1366, 400, true ); // задаем размер изображения
+
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus(
 			array(
@@ -130,8 +136,8 @@ add_action( 'after_setup_theme', 'webmag_content_width', 0 );
 function webmag_widgets_init() {
 	register_sidebar(
 		array(
-			'name'          => esc_html__( 'Sidebar', 'webmag' ),
-			'id'            => 'sidebar-1',
+			'name'          => esc_html__( 'Sidebar Menu', 'webmag' ),
+			'id'            => 'sidebar-menu',
 			'description'   => esc_html__( 'Add widgets here.', 'webmag' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
