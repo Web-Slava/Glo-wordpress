@@ -21,6 +21,7 @@ Template Post Type: page
 							the_content();												
 						endwhile; // End of the loop.
 						?>
+						<!-- <?php echo do_shortcode('[iframe]'); ?> -->
 					</div>
 					
 					<!-- aside -->

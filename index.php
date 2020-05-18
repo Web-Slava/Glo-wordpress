@@ -31,7 +31,9 @@ get_header();
 
 				$query = new WP_Query( [
 					'posts_per_page' => 2,
-					'category__name' => 'css, javascript, web design, popular, jquery, news',
+					'post_type'		 => 'video',
+					'genre'			 => 'Lesson',
+					//'category__name' => 'css, javascript, web design, popular, jquery, news',
 				] );
 				
 				if ( $query->have_posts() ) {
@@ -50,7 +52,10 @@ get_header();
 											$category_id = get_cat_ID($category);
 											$link = get_category_link($category_id);
 											echo $link;
-							 			?>"><?php echo get_the_category()[0] -> cat_name; ?></a>
+							 			?>"><?php  the_taxonomies(array(
+												'template' => '%s %l',
+												'sep' 	   => '<br>',
+										 )); ?></a>
 										<span class="post-date"><?php the_time('j F, Y'); ?></span>
 									</div>
 									<h3 class="post-title"><a href="<?php the_permalink() ?>"> <?php the_title(); ?></a></h3>
