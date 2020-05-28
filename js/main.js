@@ -1,5 +1,5 @@
 (function($) {
-	"use strict"
+	// "use strict";
 
 	// Fixed Nav
 	var lastScrollTop = 0;
@@ -12,7 +12,7 @@
 				$('#nav-fixed').removeClass('slide-down').addClass('slide-up');
 			}
 		}
-		lastScrollTop = wScroll
+		lastScrollTop = wScroll;
 	});
 
 	// Search Nav
@@ -57,7 +57,7 @@
 
 	function setStickyPos () {
 		if ($shares.length > 0) {
-			$sharesTop = $shares.offset().top
+			$sharesTop = $shares.offset().top;
 			$sharesConTop = $sharesCon.offset().top;
 			$sharesConleft = $sharesCon.offset().left;
 			$sharesConHeight = $sharesCon.height();
@@ -88,4 +88,31 @@
 
 	setStickyPos();
 
+	var form = $('#sendEmail');
+	var action = form.attr('action');
+
+	form.on('submit', function(event){
+		var formData = {
+			name: $('#name').val(),
+			email: $('#email').val()
+		};
+
+		$.ajax({
+			url: action,
+			type: 'POST',
+			data: formData,
+			error: function(request, txtstatus, errorThrown){
+				console.log(request);
+				console.log(txtstatus);
+				console.log(errorThrown);
+			},
+			success: function(){
+				form.html("Успешно отправлена");
+			}
+		});
+		event.preventDefault();
+	});
+
 })(jQuery);
+
+

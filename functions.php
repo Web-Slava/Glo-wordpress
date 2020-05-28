@@ -145,6 +145,17 @@ function webmag_widgets_init() {
 			'after_title'   => '</h2>',
 		)
 	);
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Categories', 'webmag' ),
+			'id'            => 'sidebar-categories',
+			'description'   => esc_html__( 'Add widgets here.', 'webmag' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
 }
 add_action( 'widgets_init', 'webmag_widgets_init' );
 
@@ -153,15 +164,7 @@ add_action( 'widgets_init', 'webmag_widgets_init' );
  */
 
  // дабавляем стили и скрипты из index.html в index.php
-function webmag_scripts() {
-	wp_enqueue_style( 'webmag-style', get_stylesheet_uri(), array(), _S_VERSION ); // было
-
-	wp_enqueue_style('nunito-sans', 'https://fonts.googleapis.com/css?family=Nunito+Sans:700%7CNunito:300,600');
-	wp_enqueue_style('bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css');
-	wp_enqueue_style('font-awesome', get_template_directory_uri() . '/css/font-awesome.min.css');
-	wp_enqueue_style('style', get_template_directory_uri() . '/css/style.css');
-
-	wp_style_add_data( 'webmag-style', 'rtl', 'replace' ); // было
+ function webmag_scripts() {
 	// удаляем старый jquery и подключаем свой
 	wp_deregister_script( 'jquery' );
 	wp_register_script( 'jquery', get_template_directory_uri() . '/js/jquery.min.js', '', _S_VERSION, true);
@@ -170,17 +173,25 @@ function webmag_scripts() {
 	// 'имя файла', 'путь к нему', 'зависимость', 'версия', 'где подключать'
 	wp_enqueue_script('bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', 'jquery', _S_VERSION, true);
 	wp_enqueue_script('main', get_template_directory_uri() . '/js/main.js', 'jquery', _S_VERSION, true);
-
 	wp_enqueue_script( 'webmag-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
 	wp_enqueue_script( 'webmag-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), _S_VERSION, true );
-
 	//wp_enqueue_script('animate', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.css', '', '_S_VERSION', true);
-
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'webmag_scripts' );
+
+if(!function_exists('webmag_styles')){
+	function webmag_styles(){
+		wp_enqueue_style('nunito-sans', 'https://fonts.googleapis.com/css?family=Nunito+Sans:700%7CNunito:300,600');
+		wp_enqueue_style('bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css');
+		wp_enqueue_style('font-awesome', get_template_directory_uri() . '/css/font-awesome.min.css');
+		wp_enqueue_style('style', get_template_directory_uri() . '/css/style.css');
+		wp_style_add_data( 'webmag-style', 'rtl', 'replace' ); // было
+	}
+	add_action( 'wp_enqueue_scripts', 'webmag_styles' );
+}
 
 // функция для добавления библиотеки animate.css в footer 
 function add_library_animate(){
@@ -198,6 +209,20 @@ add_filter('excerpt_more', function($more) {
 	return '...';
 }); // вместо [...] выводит ... у обрезанного текста
 
+add_filter('the_title', 'cut_the_title'); 
+function cut_the_title($title){
+	return wp_trim_words($title, 5, '...'); // обрезает текст до определенного количества слов (второй параметр = 5)
+};
+
+add_filter('wpcf7_autop_or_not', '__return_false'); //удаляем теги <p> в форме отправки
+
+add_filter( 'wp_list_categories', 'add_span_to_categories'); // в категориях убираем скобки и оборачиваем в span
+function add_span_to_categories( $text ){
+    $text = str_replace('(', '<span>', $text);
+    $text = str_replace(')', '</span>', $text);
+    return $text;
+}
+
 function myIframe ($atts){
 	$atts = shortcode_atts(array(
 		'href' => 'https://www.youtube.com/embed/RhMYBfF7-hE',
@@ -207,6 +232,14 @@ function myIframe ($atts){
 	return '<iframe src="'. $atts['href'] .'" width="'. $atts['width'] .'" height="'. $atts['height'] .'"></iframe>';
 }
 add_shortcode( 'iframe', 'myIframe' ); // добавляем шорткод 
+
+function add_adress($atts){
+	$atts = shortcode_atts( array(
+		'adress' => '',
+	), $atts);
+	return $atts['adress'];
+}
+add_shortcode( 'add_adress_menu', 'add_adress' );
 
 /**
  * Implement the Custom Header feature.
@@ -321,3 +354,63 @@ function create_video_taxonomies(){
 		'rewrite'       => array( 'slug' => 'the_author' ), // свой слаг в URL
 	));
 }
+
+// настройки кастомайзера
+add_action( 'customize_register', 'customizer_init' );
+function customizer_init( WP_Customize_Manager $wp_customize ){
+	$transport = 'postMessage';
+	// секция
+	if( $section = 'advanced_options' ){
+
+		// Добавляем ещё одну секцию - Настройки фона
+		$wp_customize->add_section( $section, [
+			'title'    => 'Код аналитики',
+			'priority' => 10,
+		] );
+
+		// настройка
+		$setting = 'analytics_code';
+
+		$wp_customize->add_setting( $setting, [
+				'default'      => '', // по умолчанию - фоновое изображение не установлено
+				'transport'    => $transport
+			]
+		);
+
+		$wp_customize->add_control(
+			new WP_Customize_Image_Control( $wp_customize, $setting, [
+				'label'    => 'Вставте код сюда',
+				'type'	   => 'textarea',
+				'settings' => $setting,
+				'section'  => $section
+			] )
+		);
+	}
+}
+
+// обрабатываем ajax запрос (в main.js написан)
+add_action( 'wp_ajax_send_mail', 'send_mail');
+add_action( 'wp_ajax_nopriv_send_mail', 'send_mail');
+
+function send_mail(){
+	$name = $_POST['name'];
+	$email = $_POST['email'];
+
+	// подразумевается что $to, $subject, $message уже определены...
+	$to = get_option('admin_email');
+
+	// удалим фильтры, которые могут изменять заголовок $headers
+	remove_all_filters( 'wp_mail_from' );
+	remove_all_filters( 'wp_mail_from_name' );
+
+	$headers = array(
+		'From: Me Myself <comslava@mail.ru>',
+		'content-type: text/html',
+		'Cc: John Q Codex <jqc@wordpress.org>',
+		'Cc: iluvwp@wordpress.org', // тут можно использовать только простой email адрес
+	);
+
+	wp_mail( $to, $name, $email, $headers );
+	wp_die();
+
+};

@@ -32,7 +32,7 @@
 						<li><a href="#">Privacy Policy</a></li>
 						<li><a href="#">Advertisement</a></li>
 					</ul> -->
-
+					
 					<div class="footer-copyright">
 						<span>&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
@@ -51,15 +51,6 @@
 						'container_class' => 'footer-widget',
 						'menu_class'      => 'footer-links',
 					]) ?>
-					
-						<!-- <div class="footer-widget">
-							<h3 class="footer-title">About Us</h3>
-							<ul class="footer-links">
-								<li><a href="about.html">About Us</a></li>
-								<li><a href="#">Join Us</a></li>
-								<li><a href="contact.html">Contacts</a></li>
-							</ul>
-						</div> -->
 
 					</div>
 					<div class="col-md-6">
@@ -72,16 +63,6 @@
 						'menu_class'      => 'footer-links',
 					]) ?>
 
-						<!-- <div class="footer-widget">
-							<h3 class="footer-title">Catagories</h3>
-							<ul class="footer-links">
-								<li><a href="category.html">Web Design</a></li>
-								<li><a href="category.html">JavaScript</a></li>
-								<li><a href="category.html">Css</a></li>
-								<li><a href="category.html">Jquery</a></li>
-							</ul>
-						</div> -->
-
 					</div>
 				</div>
 			</div>
@@ -89,10 +70,16 @@
 				<div class="footer-widget">
 					<h3 class="footer-title">Join our Newsletter</h3>
 					<div class="footer-newsletter">
-						<form>
-							<input class="input" type="email" name="newsletter" placeholder="Enter your email">
-							<button class="newsletter-btn"><i class="fa fa-paper-plane"></i></button>
-						</form>
+						
+					<form name="sendEmail" id="sendEmail" method="post" action="<?php echo admin_url('admin-ajax.php?action=send_mail') ?>">
+						<input class="input" id="name" type="text" name="name" placeholder="Enter your name">
+						<input class="input" id="email" type="email" name="newsletter" placeholder="Enter your email">
+						<input type="submit" id="submit" name="button" value="Send message">
+						<!-- <button class="newsletter-btn"><i class="fa fa-paper-plane"></i></button> -->
+					</form>
+
+					<!-- <?php echo do_shortcode( '[ninja_form id=2]' ) ?> -->
+					
 					</div>
 					<ul class="footer-social">
 						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -110,6 +97,5 @@
 <!-- /Footer -->
 </div><!-- #page -->
 <?php wp_footer(); ?>
-
 </body>
 </html>

@@ -1,5 +1,5 @@
 /* 
-Template Name: WebMag Html Template
+Template Name: webmag
 
 Author: yaminncco
 
@@ -119,6 +119,13 @@ RESPONSIVE
      padding: 0px 15px;
      -webkit-transition: 0.2s border;
      transition: 0.2s border;
+     margin-bottom: 15px;
+}
+.btn-submit{
+    background-color: #212631;
+    color: #fff;
+    border: 0;
+    padding: 5px 15px;
 }
  .input:focus {
      border-color: #3d455c;
@@ -635,6 +642,37 @@ RESPONSIVE
 }
  .post.post-widget .post-title {
      font-size: 18px;
+}
+.widget.widget_categories ul li+li{
+    margin-top: 10px;
+}
+.widget.widget_categories ul li.cat-item{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eceef2;
+}
+li.cat-item span{
+    padding: 0 10px;
+    background-color: #212631;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 15%;
+}
+li.cat-item.cat-item-23 span{
+    background-color: #0078ff;
+}
+li.cat-item.cat-item-22 span{
+    background-color: #ff8700;
+}
+li.cat-item.cat-item-24 span{
+    background-color: #8d00ff;
+}
+li.cat-item.cat-item-21 span{
+    background-color: #4BB92F;
+}
+li.cat-item.cat-item-20 span{
+    background-color: #dd4b39;
 }
 /*----------------------------*\
 	post row

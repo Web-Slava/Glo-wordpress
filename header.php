@@ -17,7 +17,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
-	<?php wp_head(); ?>
+	<?php wp_head(); 
+	echo get_theme_mod( 'analytics_code' );
+	?>
 </head>
 
 <body <?php body_class(); ?>>
@@ -61,18 +63,18 @@
 			<!-- Aside Nav -->
 			<div id="nav-aside">
 				<!-- nav -->
-
 				<?php wp_nav_menu([
 					'theme_location'  => 'nav-aside-menu',
 					'container'       => 'div',
 					'container_class' => 'section-row',
 					'menu_class'      => 'nav-aside-menu',
-				]) ?>
+				])
+				?>
 
 				<!-- widget posts -->
 					<?php get_sidebar('menu'); ?>
 				<!-- /widget posts -->
-
+					<?php the_field('adress', 74); ?>
 				<!-- social links -->
 				<div class="section-row">
 					<h3>Follow us</h3>

@@ -16,11 +16,11 @@ Template Post Type: page
 					<div class="col-md-6">
 						<div class="section-row">
 							<h3>Contact Information</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+							<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint tenetur voluptas sunt corrupti reprehenderit laudantium rem, veritatis exercitationem quibusdam sed!</p>
 							<ul class="list-style">
 								<li><p><strong>Email:</strong> <a href="#">Webmag@email.com</a></p></li>
 								<li><p><strong>Phone:</strong> 213-520-7376</p></li>
-								<li><p><strong>Address:</strong> 3770 Oliver Street</p></li>
+								<li><p><strong>Address:</strong> <?php the_field('adress'); ?></p></li>
 							</ul>
 						</div>
 					</div>

@@ -135,20 +135,22 @@ get_header();
 				<div class="row">
 					<!-- post -->
 					<ul>
-						<?php		
-						global $post;
-
-						$query = new WP_Query( [
-							'posts_per_page' => 1,
-							'category__name' => 'css, javascript, web design, popular, jquery, news',
-						] );
-						
-						if ( $query->have_posts() ) {
-							while ( $query->have_posts() ) {
-								$query->the_post();
-								?>
-								<!-- Вывода постов, функции цикла: the_title() и т.д. -->
-								<!-- post -->
+						<?php $posts = get_posts( array(
+							'numberposts' => 7,
+							'orderby'     => 'date',
+							'order'       => 'DESC',
+							'include'     => array(),
+							'exclude'     => array(),
+							'meta_key'    => '',
+							'meta_value'  =>'',
+							'post_type'   => 'post',
+							'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+						) );
+						$count = 1;
+						foreach( $posts as $post ){
+							$count++;
+							setup_postdata($post); 
+							if($count == 2){ ?>
 								<div class="col-md-12">
 									<div class="post post-thumb">
 										<a class="post-img" href="<?php the_permalink(); ?>"><?php the_post_thumbnail('post-thumb-lg'); ?></a>
@@ -166,67 +168,38 @@ get_header();
 										</div>
 									</div>
 								</div>
-								<!-- /post -->						
-								<?php 
-							}
-						} else {
-							// Постов не найдено
-							echo "постов не найдено";
-						}			
-						wp_reset_postdata(); // Сбрасываем $post
-						?>				
-					</ul>	
-					<!-- /post -->
-
-					<!-- post -->
-					<ul>
-						<?php $posts = get_posts( array(
-							'numberposts' => 6,
-							'orderby'     => 'date',
-							'order'       => 'DESC',
-							'include'     => array(),
-							'exclude'     => array(),
-							'meta_key'    => '',
-							'meta_value'  =>'',
-							'post_type'   => 'post',
-							'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
-						) );
-						$count = 0;
-						foreach( $posts as $post ){
-							$count++;
-							setup_postdata($post); ?>
-						    <div class="col-md-6">
-								<div class="post">
-									<a class="post-img" href="<?php the_permalink(); ?>"><?php the_post_thumbnail('post-thumb-sm'); ?></a>
-									<div class="post-body">
-										<div class="post-meta">
-											<a class="post-category cat-4" href="<?php
-												$category = get_the_category()[0] -> cat_name;
-												$category_id = get_cat_ID($category);
-												$link = get_category_link($category_id);
-												echo $link;
-							 				?>"><?php echo get_the_category()[0] -> cat_name; ?></a>
-											<span class="post-date"><?php the_time('j F, Y'); ?></span>
+							<?php } else{ ?>
+								<div class="col-md-6">
+									<div class="post">
+										<a class="post-img" href="<?php the_permalink(); ?>"><?php the_post_thumbnail('post-thumb-sm'); ?></a>
+										<div class="post-body">
+											<div class="post-meta">
+												<a class="post-category cat-4" href="<?php
+													$category = get_the_category()[0] -> cat_name;
+													$category_id = get_cat_ID($category);
+													$link = get_category_link($category_id);
+													echo $link;
+							 					?>"><?php echo get_the_category()[0] -> cat_name; ?></a>
+												<span class="post-date"><?php the_time('j F, Y'); ?></span>
+											</div>
+											<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 										</div>
-										<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 									</div>
 								</div>
-							</div>
-							<?php					
+							<?php }				
 							if( $count%2 == 0 ) { ?> 
 								<div class="clearfix visible-md visible-lg"></div> 
 							<?php
 							} else if ( !$query->have_posts() ){
 								echo "постов не найдено!";
 							}
-						} 
+						} // close foreach
 							wp_reset_postdata(); 
 							?>
 					</ul>
 					<!-- /post -->
-				</div>
-	
-			</div>
+				</div> <!-- /row -->
+			</div> <!-- /col-md-8 -->
 			<div class="col-md-4">
 				<!-- post widget -->
 				<div class="aside-widget">
@@ -437,21 +410,9 @@ get_header();
 					</div>
 					<!-- /ad -->
 					
-					<!-- catagories -->
-					<div class="aside-widget">
-						<div class="section-title">
-							<h2>Catagories</h2>
-						</div>
-						<div class="category-widget">
-							<ul>
-								<li><a href="#" class="cat-1">Web Design<span>340</span></a></li>
-								<li><a href="#" class="cat-2">JavaScript<span>74</span></a></li>
-								<li><a href="#" class="cat-4">JQuery<span>41</span></a></li>
-								<li><a href="#" class="cat-3">CSS<span>35</span></a></li>
-							</ul>
-						</div>
-					</div>
-					<!-- /catagories -->
+					<!-- widget-catagories -->
+					<?php get_sidebar('categories'); ?>
+					<!-- /widget-catagories -->
 					
 					<!-- tags -->
 					<div class="aside-widget">
